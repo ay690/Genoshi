@@ -1,10 +1,13 @@
-import { Button } from "@/components/ui/button"
+import NotFound from "./pages/NotFound"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+    </BrowserRouter>
   )
 }
 
