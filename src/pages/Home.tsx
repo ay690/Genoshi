@@ -1,6 +1,7 @@
 import { Sparkles, Cloud, Image, Database, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, type Variants } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -78,27 +79,23 @@ const Home = () => {
 
           <div className="flex items-center gap-2">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="cursor-pointer"
-                onClick={() =>
-                  window.open("https://github.com/ay690", "_blank")
-                }
+              <a
+                href="https://github.com/ay690"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                GitHub
-              </Button>
+                <Button variant="ghost" size="sm" className="cursor-pointer">
+                  GitHub
+                </Button>
+              </a>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                variant="outline"
-                size="sm"
-                className="cursor-pointer"
-                onClick={() => (window.location.href = "/chat")}
-              >
-                Open Chat
-              </Button>
+              <Link to="/chat">
+                <Button variant="outline" size="sm" className="cursor-pointer">
+                  Open Chat
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -138,27 +135,26 @@ const Home = () => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.96 }}
                 >
-                  <Button
-                    onClick={() => (window.location.href = "/chat")}
-                    className="px-5 py-2 cursor-pointer"
-                  >
-                    Start chatting
-                  </Button>
+                  <Link to="/chat">
+                    <Button className="px-5 py-2 cursor-pointer">
+                      Start chatting
+                    </Button>
+                  </Link>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.96 }}
                 >
-                  <Button
-                    variant="outline"
-                    onClick={() =>
-                      window.open("https://github.com/ay690", "_blank")
-                    }
-                    className="cursor-pointer"
+                  <a
+                    href="https://github.com/ay690"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    View on GitHub
-                  </Button>
+                    <Button variant="outline" className="cursor-pointer">
+                      View on GitHub
+                    </Button>
+                  </a>
                 </motion.div>
               </motion.div>
 
@@ -244,7 +240,7 @@ const Home = () => {
               <motion.div
                 initial={{ scale: 0.96 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} 
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="rounded-full p-3 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-lg"
               >
                 <Sparkles className="h-5 w-5 text-white" />
@@ -305,27 +301,27 @@ const Home = () => {
 
           <div className="flex items-center gap-3">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }}>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="cursor-pointer"
-                onClick={() => (window.location.href = "/chat")}
-              >
-                Try Chat
-              </Button>
+              <Link to="/chat">
+                <Button variant="ghost" size="sm" className="cursor-pointer">
+                  Try Chat
+                </Button>
+              </Link>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }}>
-              <Button
-                variant="outline"
-                size="sm"
-                className="cursor-pointer"
-                onClick={() =>
-                  window.open("https://github.com/ay690", "_blank")
-                }
+              <a
+                href="https://github.com/ay690"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                GitHub
-              </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer"
+                >
+                  GitHub
+                </Button>
+              </a>
             </motion.div>
           </div>
         </div>
