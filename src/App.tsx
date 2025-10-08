@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { Toaster as Sonner } from "sonner";
 import { Chat } from "./pages/Chat";
+import Home from "./pages/Home";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ function App() {
           <Sonner />
           <BrowserRouter>
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
