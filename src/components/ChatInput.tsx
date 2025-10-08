@@ -54,7 +54,7 @@ export const ChatInput = ({ onSend, disabled }: ChatInputProps) => {
             disabled={!message.trim() || disabled}
             size="sm"
             className={cn(
-              "bg-gradient-to-r from-indigo-500 to-blue-500 text-white",
+              "bg-gradient-to-r from-indigo-500 to-blue-500 text-white cursor-pointer",
               "hover:shadow-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300",
               "disabled:opacity-50 disabled:cursor-not-allowed"
             )}
