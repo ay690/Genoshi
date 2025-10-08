@@ -12,16 +12,15 @@ import {
   setAvailableTools,
 } from "@/store/slices/chatSlice";
 import { streamChat, fetchAvailableTools } from "@/services/chatAPI";
-// import { useToast } from '@/hooks/use-toast';
-import { Sparkles, Github } from "lucide-react";
+import { Sparkles, Github, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Chat = () => {
   const dispatch = useAppDispatch();
   const isStreaming = useAppSelector((state) => state.chat.isStreaming);
-  //   const currentStreamingMessageId = useAppSelector((state) => state.chat.currentStreamingMessageId);
 
   useEffect(() => {
     fetchAvailableTools()
@@ -95,14 +94,41 @@ export const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <motion.div
+      className="flex flex-col h-screen bg-gradient-to-br from-background via-muted/30 to-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       {/* Header */}
-      <header className="backdrop-blur-md bg-white/70 dark:bg-gray-800/50 border-b border-gray-300/50 dark:border-gray-700/50 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link to={"/"}>
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-500">
-                <Sparkles className="h-6 w-6 text-white" />
+      <header className="relative backdrop-blur-lg bg-white/60 dark:bg-gray-900/40 border-b border-gray-300/40 dark:border-gray-700/40 shadow-sm">
+        <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Left section with floating sparkle */}
+          <div className="flex items-center gap-3 relative">
+            <motion.div
+              className="absolute -right-6 -top-1"
+              animate={{
+                y: [0, -8, 0],
+                transition: {
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                },
+              }}
+            >
+              <motion.div
+                initial={{ scale: 0.96 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-full p-3 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-lg"
+              >
+                <Sparkles className="h-3 w-3 text-white" />
+              </motion.div>
+            </motion.div>
+
+            <Link to="/" className="flex items-center gap-3 hover:opacity-80">
+              <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-500 shadow-md">
+                <ArrowLeft className="h-5 w-5 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold">AI Assistant</h1>
@@ -110,9 +136,10 @@ export const Chat = () => {
                   Streaming with tool calls
                 </p>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
+          {/* GitHub Button */}
           <Button
             variant="outline"
             size="sm"
@@ -129,12 +156,11 @@ export const Chat = () => {
       <div className="flex-1 overflow-hidden">
         <div className="h-full max-w-5xl mx-auto flex flex-col">
           <ChatContainer />
-
           <div className="p-6 border-t border-gray-200/20 dark:border-gray-700/20">
             <ChatInput onSend={handleSendMessage} disabled={isStreaming} />
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

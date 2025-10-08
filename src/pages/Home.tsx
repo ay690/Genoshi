@@ -1,5 +1,6 @@
 import { Sparkles, Cloud, Image, Database, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, type Variants } from "framer-motion";
 
 const features = [
   {
@@ -29,40 +30,76 @@ const features = [
   },
 ];
 
+/* Motion variants (typed) */
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
       <header className="pt-12 pb-6 px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg p-2 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-md">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="flex items-center gap-3"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="rounded-lg p-2 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-md"
+            >
               <Sparkles className="h-6 w-6 text-white" />
-            </div>
-            <div>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
               <h3 className="text-lg font-semibold">Genoshi</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 AI tools & chat
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => window.open("https://github.com/ay690", "_blank")}
-            >
-              GitHub
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => (window.location.href = "/chat")}
-            >
-              Open Chat
-            </Button>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="cursor-pointer"
+                onClick={() =>
+                  window.open("https://github.com/ay690", "_blank")
+                }
+              >
+                GitHub
+              </Button>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="cursor-pointer"
+                onClick={() => (window.location.href = "/chat")}
+              >
+                Open Chat
+              </Button>
+            </motion.div>
           </div>
         </div>
       </header>
@@ -70,37 +107,65 @@ const Home = () => {
       <main className="px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 items-center py-12">
           {/* Hero */}
-          <section className="space-y-6">
-            <div className="max-w-xl">
-              <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-sky-500">
+          <section>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              <motion.h1
+                variants={fadeUp}
+                className="text-4xl sm:text-5xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-sky-500"
+              >
                 AI Assistant for tools, data & creative tasks
-              </h1>
-              <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+              </motion.h1>
+
+              <motion.p
+                variants={fadeUp}
+                className="mt-4 text-lg text-gray-600 dark:text-gray-300"
+              >
                 Chat with a helpful assistant that can call tools: fetch
                 weather, compute values, generate images, and query data — all
                 inside a simple, fast UI.
-              </p>
+              </motion.p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button
-                  onClick={() => (window.location.href = "/chat")}
-                  className="px-5 py-2 cursor-pointer"
+              <motion.div
+                variants={fadeUp}
+                className="mt-6 flex flex-wrap gap-3"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
                 >
-                  Start chatting
-                </Button>
+                  <Button
+                    onClick={() => (window.location.href = "/chat")}
+                    className="px-5 py-2 cursor-pointer"
+                  >
+                    Start chatting
+                  </Button>
+                </motion.div>
 
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    window.open("https://github.com/ay690", "_blank")
-                  }
-                  className="cursor-pointer"
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
                 >
-                  View on GitHub
-                </Button>
-              </div>
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      window.open("https://github.com/ay690", "_blank")
+                    }
+                    className="cursor-pointer"
+                  >
+                    View on GitHub
+                  </Button>
+                </motion.div>
+              </motion.div>
 
-              <div className="mt-8 flex flex-wrap gap-3 items-center text-sm text-gray-500 dark:text-gray-400">
+              <motion.div
+                variants={fadeUp}
+                className="mt-8 flex flex-wrap gap-3 items-center text-sm text-gray-500 dark:text-gray-400"
+              >
                 <div className="inline-flex items-center gap-2 bg-white/60 dark:bg-white/5 backdrop-blur-md px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
                   <strong>Live demo</strong>
                   <span className="opacity-80">
@@ -113,13 +178,19 @@ const Home = () => {
                     Add more tools or connect APIs
                   </span>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </section>
 
           {/* Mock preview / card */}
           <aside className="relative">
-            <div className="glass-card rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="glass-card rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700"
+            >
               <div className="flex items-center justify-between mb-4">
                 <h4 className="font-semibold">Assistant Preview</h4>
                 <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -156,26 +227,56 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* small floating badge */}
-            <div className="absolute -right-6 -top-6">
-              <div className="rounded-full p-3 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-lg">
+            {/* floating badge with continuous Y animation */}
+            <motion.div
+              className="absolute -right-6 -top-6"
+              animate={{
+                y: [0, -8, 0],
+                transition: {
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                },
+              }}
+            >
+              <motion.div
+                initial={{ scale: 0.96 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} 
+                className="rounded-full p-3 bg-gradient-to-br from-indigo-500 to-blue-500 shadow-lg"
+              >
                 <Sparkles className="h-5 w-5 text-white" />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </aside>
         </div>
 
         {/* Features */}
         <section className="max-w-7xl mx-auto py-10">
-          <h3 className="text-2xl font-semibold mb-6">Features</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.h3
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-semibold mb-6"
+          >
+            Features
+          </motion.h3>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {features.map((f) => {
               const Icon = f.icon;
               return (
-                <div
+                <motion.div
                   key={f.title}
+                  variants={fadeUp}
                   className="p-5 rounded-2xl bg-white/60 dark:bg-gray-900/60 border border-gray-100 dark:border-gray-800 backdrop-blur-md shadow-sm"
                 >
                   <div className="flex items-center gap-4">
@@ -189,10 +290,10 @@ const Home = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </section>
       </main>
 
@@ -203,22 +304,29 @@ const Home = () => {
           </p>
 
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => (window.location.href = "/chat")}
-            >
-              Try Chat
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => window.open("https://github.com/ay690", "_blank")}
-            >
-              GitHub
-            </Button>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="cursor-pointer"
+                onClick={() => (window.location.href = "/chat")}
+              >
+                Try Chat
+              </Button>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="cursor-pointer"
+                onClick={() =>
+                  window.open("https://github.com/ay690", "_blank")
+                }
+              >
+                GitHub
+              </Button>
+            </motion.div>
           </div>
         </div>
       </footer>
