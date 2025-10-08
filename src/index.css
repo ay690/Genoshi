@@ -118,3 +118,99 @@
     @apply bg-background text-foreground;
   }
 }
+
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  background: transparent;
+  z-index: 9999;
+}
+
+/* Expanding bluish-indigo background */
+.background-expand {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #6366f1, #3b82f6);
+  animation: spread 2s ease-in-out forwards;
+  z-index: 0;
+}
+
+/* Glowing bloom animation with blue-indigo tones */
+.bloom {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #93c5fd 0%,  /* sky-300 */
+    #818cf8 50%, /* indigo-400 */
+    #c7d2fe 100% /* indigo-200 */
+  );
+  animation: bloom 1.5s ease-in-out infinite;
+  filter: blur(14px);
+  z-index: 1;
+}
+
+/* Loader text styling */
+.loader-text {
+  margin-top: 1rem;
+  color: #e0e7ff;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  z-index: 2;
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+/* Keyframes for glowing bloom */
+@keyframes bloom {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(10px);
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.7;
+    filter: blur(20px);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(10px);
+  }
+}
+
+/* Keyframes for expanding background */
+@keyframes spread {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.6;
+  }
+  100% {
+    width: 300vw;
+    height: 300vh;
+    opacity: 1;
+  }
+}
+
+/* Subtle text pulse animation */
+@keyframes textPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
